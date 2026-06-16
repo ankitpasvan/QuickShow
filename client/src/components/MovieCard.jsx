@@ -11,12 +11,12 @@ const MovieCard = ({ movie }) => {
 
       <img
         onClick={() => {
-          navigate(`/movie/${movie.id}`);
+          navigate(`/movie/${movie._id}`);
           window.scrollTo(0, 0);
         }}
         src={movie.backdrop_path}
         alt=""
-        className="rounded-lg h-52 w-full object-cover object-right-bottom cursor-pointer"
+     className="rounded-lg h-52 w-full object-cover object-center cursor-pointer"
       />
 
       <p className="font-semibold mt-2 truncate">
