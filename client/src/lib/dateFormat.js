@@ -1,9 +1,10 @@
-export const dateFormat = (date) => {
+const dateFormat = (date) => {
   return new Date(date).toLocaleDateString("en-US", {
     weekday: "short",
-    month: "numeric",
+    month: "short",
     day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
+    year: "numeric",
   });
 };
+
+export default dateFormat;

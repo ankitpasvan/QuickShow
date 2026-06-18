@@ -5,15 +5,25 @@ import { Outlet } from 'react-router-dom'
 
 const Layout = () => {
   return (
-    <>
-    <AdminNavbar/>
-    <div className='flex'>
-        <AdminSidebar/>
+    <div className="min-h-screen flex flex-col">
+
+      {/* Navbar */}
+      <AdminNavbar />
+
+      {/* Sidebar + Content */}
+      <div className="flex flex-1">
+
+        {/* Sidebar */}
+        <AdminSidebar />
+
+        {/* Right Side */}
+        <div className="flex-1 h-[calc(100vh-64px)] overflow-y-auto px-6 md:px-10 py-8">
+          <Outlet />
+        </div>
+
+      </div>
+
     </div>
-    <div className='flex-1 px-4 py-10 md:px-10 h-[calc(100vh-64px)] overflow-y-auto'>
-        <Outlet/>
-    </div>
-    </>
   )
 }
 
