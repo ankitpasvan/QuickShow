@@ -27,7 +27,7 @@ const ListShows = () => {
       <Title text1="List" text2="Shows" />
 
       <div className="mt-6 overflow-x-auto rounded-lg border border-gray-700">
-        <table className="w-full min-w-[600px] text-sm text-left">
+        <table className="w-full min-w-600px text-sm text-left">
           
           <thead className="bg-primary/10 text-gray-300">
             <tr>
