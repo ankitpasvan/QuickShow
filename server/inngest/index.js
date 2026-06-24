@@ -8,9 +8,8 @@ export const inngest = new Inngest({
 // USER CREATED
 const syncUserCreation = inngest.createFunction(
   { id: "sync-from-clerk" },
+  { event: "clerk/user.created" }, // ✅ FIX ADDED
   async ({ event }) => {
-    if (event.name !== "clerk/user.created") return;
-
     const { id, first_name, last_name, email_addresses, image_url } =
       event.data;
 
@@ -26,9 +25,8 @@ const syncUserCreation = inngest.createFunction(
 // USER DELETED
 const syncUserDeletion = inngest.createFunction(
   { id: "delete-user" },
+  { event: "clerk/user.deleted" }, // ✅ FIX ADDED
   async ({ event }) => {
-    if (event.name !== "clerk/user.deleted") return;
-
     await User.findByIdAndDelete(event.data.id);
   },
 );
@@ -36,9 +34,8 @@ const syncUserDeletion = inngest.createFunction(
 // USER UPDATED
 const syncUserUpdation = inngest.createFunction(
   { id: "update-user" },
+  { event: "clerk/user.updated" }, // ✅ FIX ADDED
   async ({ event }) => {
-    if (event.name !== "clerk/user.updated") return;
-
     const { id, first_name, last_name, email_addresses, image_url } =
       event.data;
 
