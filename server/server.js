@@ -23,7 +23,7 @@ app.use(clerkMiddleware());
 app.get("/", (req, res) => {
   res.status(200).send("Server is Live 🚀");
 });
-
+// console.log("INNGEST FUNCTIONS:", functions);
 // INNGEST ROUTE (v3 safe)
 app.use("/api/inngest", (req, res, next) => {
   return serve({
