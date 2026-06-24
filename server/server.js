@@ -9,19 +9,28 @@ import { inngest, functions } from "./inngest/index.js";
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Connect Database
-await connectDB();
+// =======================
+// DB CONNECT (SAFE)
+// =======================
+connectDB();
 
-// Middleware
+// =======================
+// MIDDLEWARE
+// =======================
 app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware());
 
-// API Routes
+// =======================
+// HEALTH CHECK
+// =======================
 app.get("/", (req, res) => {
-  res.send(" Server is Live");
+  res.status(200).send("Server is Live 🚀");
 });
 
+// =======================
+// INNGEST ROUTE
+// =======================
 app.use(
   "/api/inngest",
   serve({
@@ -30,7 +39,24 @@ app.use(
   }),
 );
 
-// Start Server
-app.listen(port, () => {
-  console.log(` Server listening on http://localhost:${port}`);
+// =======================
+// ERROR HANDLING (IMPORTANT)
+// =======================
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: "Internal Server Error" });
 });
+
+// =======================
+// LOCAL ONLY SERVER
+// =======================
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
+
+// =======================
+// VERCEL EXPORT
+// =======================
+export default app;
