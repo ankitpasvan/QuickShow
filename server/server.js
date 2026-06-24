@@ -10,26 +10,26 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // =======================
-// DB CONNECT (SAFE)
+// DB CONNECT
 // =======================
 connectDB();
 
 // =======================
 // MIDDLEWARE
 // =======================
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use(clerkMiddleware());
 
 // =======================
-// HEALTH CHECK
+// HEALTH CHECK ROUTE
 // =======================
 app.get("/", (req, res) => {
   res.status(200).send("Server is Live 🚀");
 });
 
 // =======================
-// INNGEST ROUTE
+// INNGEST ROUTE (V3 SAFE)
 // =======================
 app.use(
   "/api/inngest",
@@ -40,15 +40,15 @@ app.use(
 );
 
 // =======================
-// ERROR HANDLING (IMPORTANT)
+// ERROR HANDLER
 // =======================
 app.use((err, req, res, next) => {
-  console.error(err);
+  console.error("Server Error:", err);
   res.status(500).json({ error: "Internal Server Error" });
 });
 
 // =======================
-// LOCAL ONLY SERVER
+// LOCAL SERVER ONLY
 // =======================
 if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
