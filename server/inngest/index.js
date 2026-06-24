@@ -1,5 +1,6 @@
 import { Inngest } from "inngest";
 import User from "../models/User.js";
+import { serve } from "inngest/express";
 
 export const inngest = new Inngest({
   id: "movie-ticket-booking",
@@ -48,4 +49,9 @@ const syncUserUpdation = inngest.createFunction(
   },
 );
 
+export const { GET, POST, PUT } = serve({
+  client: inngest, // a client created with new Inngest()
+  functions: [syncUserCreation, syncUserDeletion, syncUserUpdation], // an array of Inngest functions to serve, created with inngest.createFunction()
+  /* Optional extra configuration */
+});
 export const functions = [syncUserCreation, syncUserDeletion, syncUserUpdation];
