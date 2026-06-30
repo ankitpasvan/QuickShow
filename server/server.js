@@ -5,6 +5,7 @@ import connectDB from "./configs/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js";
+import showRouter from "./routes/showRoute.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,6 +32,7 @@ app.use("/api/inngest", (req, res, next) => {
     functions,
   })(req, res, next);
 });
+app.use("/api/show", showRouter);
 
 // ERROR HANDLER
 app.use((err, req, res, next) => {
